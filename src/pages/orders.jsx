@@ -1,5 +1,5 @@
 import './orders.css';
-import { Header } from '../components/header.jsx';
+import { Header } from '../components/Header.jsx';
 function OrdersPage() {
       return (
             <>
