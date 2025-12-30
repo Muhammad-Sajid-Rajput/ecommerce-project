@@ -1,10 +1,23 @@
 import './HomePage.css';
 import { Header } from '../components/Header.jsx';
 import CheckmarkIcon from '../assets/images/icons/checkmark.png';
-import { products } from '../assets/data/products.js';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 
 function HomePage() {
+      const [products, setProducts] = useState([]);
+
+      useEffect(() => {
+            axios.get("http://localhost:3000/api/products")
+                  .then(response => {
+                        setProducts(response.data);
+                  })
+                  .catch(error => {
+                        console.error('Error fetching products:', error);
+                  });
+      }, []);
+
       return (<>
             <title>Ecommerce Project</title>
 
