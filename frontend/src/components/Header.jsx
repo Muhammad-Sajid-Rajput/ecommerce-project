@@ -7,7 +7,7 @@ import MobileLogoWhite from '../assets/images/mobile-logo-white.png';
 
 function Header({ cart }) {
       let totalQuantity = 0;
-      cart.forEach(cartItems => {
+      cart?.forEach(cartItems => {
             totalQuantity += cartItems.quantity;
       });
 

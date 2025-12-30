@@ -10,7 +10,7 @@ function HomePage() {
       const [cart, setCart] = useState([]);
 
       useEffect(() => {
-            axios.get("http://localhost:3000/api/products")
+            axios.get("/api/products")
                   .then(response => {
                         setProducts(response.data);
                   })
@@ -18,7 +18,7 @@ function HomePage() {
                         console.error('Error fetching products:', error);
                   });
 
-            axios.get("http://localhost:3000/api/cart-items")
+            axios.get("/api/cart-items")
                   .then(response => {
                         setCart(response.data);
                   })
@@ -31,6 +31,7 @@ function HomePage() {
             <title>Ecommerce Project</title>
 
             <link rel="icon" type="image/svg+xml" href="/public/images/home-favicon.png" />
+
             <Header cart={cart} />
 
             <div className="home-page">
