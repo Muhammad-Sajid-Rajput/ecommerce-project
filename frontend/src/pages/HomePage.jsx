@@ -5,9 +5,8 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 
-function HomePage() {
+function HomePage({ cart }) {
       const [products, setProducts] = useState([]);
-      const [cart, setCart] = useState([]);
 
       useEffect(() => {
             axios.get("/api/products")
@@ -18,13 +17,6 @@ function HomePage() {
                         console.error('Error fetching products:', error);
                   });
 
-            axios.get("/api/cart-items")
-                  .then(response => {
-                        setCart(response.data);
-                  })
-                  .catch(error => {
-                        console.error('Error fetching cart data:', error);
-                  });
       }, []);
 
       return (<>
