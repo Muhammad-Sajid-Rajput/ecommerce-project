@@ -2,6 +2,7 @@ import './HomePage.css';
 import { Header } from '../components/Header.jsx';
 import CheckmarkIcon from '../assets/images/icons/checkmark.png';
 import { useState, useEffect } from 'react';
+import { formatMoney } from '../utils/money.jsx';
 import axios from 'axios';
 
 
@@ -22,7 +23,7 @@ function HomePage({ cart }) {
       return (<>
             <title>Ecommerce Project</title>
 
-            <link rel="icon" type="image/svg+xml" href="/public/images/home-favicon.png" />
+            <link rel="icon" type="image/svg+xml" href="/images/home-favicon.png" />
 
             <Header cart={cart} />
 
@@ -50,7 +51,7 @@ function HomePage({ cart }) {
                                           </div>
 
                                           <div className="product-price">
-                                                ${(product.priceCents / 100).toFixed(2)}
+                                                {formatMoney(product.priceCents)}
                                           </div>
 
                                           <div className="product-quantity-container">
