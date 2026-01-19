@@ -1,8 +1,8 @@
 import axios from "axios";
 import "./App.css";
-import { HomePage } from "./pages/HomePage.jsx";
+import { HomePage } from "./pages/HomePage/HomePage.jsx";
 import { CheckoutPage } from "./pages/CheckoutPage/checkout.jsx";
-import { OrdersPage } from "./pages/orders.jsx";
+import { OrdersPage } from "./pages/OrdersPage/orders.jsx";
 import { TrackingPage } from "./pages/tracking.jsx";
 import { NotFoundPage } from "./pages/NotFoundPage.jsx";
 import { Routes, Route } from "react-router-dom";
@@ -12,20 +12,25 @@ function App() {
   const [cart, setCart] = useState([]);
 
   useEffect(() => {
-    axios
-      .get("/api/cart-items?expand=product")
-      .then((response) => {
+    const fetchCart = async () => {
+      try {
+        const response = await axios.get("/api/cart-items?expand=product");
         setCart(response.data);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error("Error fetching cart data:", error);
-      });
+      }
+    };
+
+    fetchCart();
   }, []);
 
   return (
     <Routes>
       <Route index element={<HomePage cart={cart} />} />
-      <Route path="/checkout" element={<CheckoutPage cart={cart} />} />
+      <Route
+        path="/checkout"
+        element={<CheckoutPage cart={cart} setCart={setCart} />}
+      />
       <Route path="/orders" element={<OrdersPage cart={cart} />} />
       <Route path="/tracking" element={<TrackingPage />} />
       <Route path="*" element={<NotFoundPage />} />

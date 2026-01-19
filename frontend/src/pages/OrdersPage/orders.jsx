@@ -1,30 +1,29 @@
 import "./orders.css";
-import { Header } from "../components/Header.jsx";
-import BuyAgainIcon from "../assets/images/icons/buy-again.png";
+import { Header } from "../../components/Header.jsx";
+import BuyAgainIcon from "../../assets/images/icons/buy-again.png";
 import dayjs from "dayjs";
 import axios from "axios";
 import { useEffect, useState, Fragment } from "react";
-import { formatMoney } from "../utils/money.jsx";
+import { formatMoney } from "../../utils/money.jsx";
 
 function OrdersPage() {
   const [orders, setOrders] = useState([]);
   useEffect(() => {
-    // Fetch orders from the backend API
-    axios
-      .get("/api/orders?expand=products")
-      .then((response) => {
+    const fetchOrders = async () => {
+      try {
+        const response = await axios.get("/api/orders?expand=products");
         setOrders(response.data);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error("Error fetching orders:", error);
-      });
+      }
+    };
+
+    fetchOrders();
   }, []);
 
   return (
     <>
       <title>Orders</title>
-
-      <link rel="icon" type="image/svg+xml" href="/images/orders-favicon.png" />
 
       <Header />
 
