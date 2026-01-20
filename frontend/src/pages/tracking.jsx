@@ -26,6 +26,7 @@ function TrackingPage() {
           <img
             className="product-image"
             src="images/products/athletic-cotton-socks-6-pairs.jpg"
+            alt="Product image"
           />
 
           <div className="progress-labels-container">

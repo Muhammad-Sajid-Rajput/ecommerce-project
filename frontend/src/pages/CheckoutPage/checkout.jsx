@@ -8,6 +8,7 @@ import { PaymentSummary } from "./PaymentSummary.jsx";
 function CheckoutPage({ cart, setCart }) {
   const [deliveryOptions, setDeliveryOptions] = useState([]);
   const [paymentSummary, setPaymentSummary] = useState(null);
+  const [updatingDelivery, setUpdatingDelivery] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,9 +28,16 @@ function CheckoutPage({ cart, setCart }) {
     fetchData();
   }, []);
 
-  const handleDeliveryOptionChange = async (productId, deliveryOptionId) => {
+  const handlePlaceOrder = () => {
+    // TODO: Implement order submission logic
+    console.log("Placing order...");
+  };
+
+  const handleDeliveryOptionChange = async (cartItemId, deliveryOptionId) => {
+    if (updatingDelivery) return;
+    setUpdatingDelivery(true);
     try {
-      await axios.put(`/api/cart-items/${productId}`, {
+      await axios.put(`/api/cart-items/${cartItemId}`, {
         deliveryOptionId,
       });
       // Refetch cart to update the UI
@@ -41,6 +49,8 @@ function CheckoutPage({ cart, setCart }) {
       setPaymentSummary(paymentResponse.data);
     } catch (error) {
       console.error("Error updating delivery option:", error);
+    } finally {
+      setUpdatingDelivery(false);
     }
   };
 
@@ -57,8 +67,12 @@ function CheckoutPage({ cart, setCart }) {
             deliveryOptions={deliveryOptions}
             cart={cart}
             handleDeliveryOptionChange={handleDeliveryOptionChange}
+            updatingDelivery={updatingDelivery}
           />
-          <PaymentSummary paymentSummary={paymentSummary} />
+          <PaymentSummary
+            paymentSummary={paymentSummary}
+            onPlaceOrder={handlePlaceOrder}
+          />
         </div>
       </div>
     </>

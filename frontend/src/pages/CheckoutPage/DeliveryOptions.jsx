@@ -5,6 +5,7 @@ function DeliveryOptions({
   deliveryOptions,
   cartItem,
   handleDeliveryOptionChange,
+  disabled = false,
 }) {
   return (
     <div className="delivery-options">
@@ -27,15 +28,21 @@ function DeliveryOptions({
               }
               className="delivery-option-input"
               name={`delivery-option-${cartItem.productId}`}
+              disabled={disabled}
+              id={`delivery-option-${cartItem.productId}-${deliveryOption.id}`}
             />
-            <div>
-              <div className="delivery-option-date">
-                {dayjs()
-                  .add(deliveryOption.estimatedDeliveryTimeMs)
-                  .format("dddd, MMMM D")}
+            <label
+              htmlFor={`delivery-option-${cartItem.productId}-${deliveryOption.id}`}
+            >
+              <div>
+                <div className="delivery-option-date">
+                  {dayjs()
+                    .add(deliveryOption.estimatedDeliveryTimeMs, "millisecond")
+                    .format("dddd, MMMM D")}
+                </div>
+                <div className="delivery-option-price">{priceString}</div>
               </div>
-              <div className="delivery-option-price">{priceString}</div>
-            </div>
+            </label>
           </div>
         );
       })}

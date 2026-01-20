@@ -19,14 +19,21 @@ function HomePage({ cart }) {
     fetchProducts();
   }, []);
 
+  const handleAddToCart = (productId, quantity) => {
+    // TODO: Implement add to cart logic
+    console.log("Add to cart", productId, quantity);
+  };
+
+  useEffect(() => {
+    document.title = "Ecommerce Project";
+  }, []);
+
   return (
     <>
-      <title>Ecommerce Project</title>
-
       <Header cart={cart} />
 
       <div className="home-page">
-        <ProductsGrid products={products} />
+        <ProductsGrid products={products} onAddToCart={handleAddToCart} />
       </div>
     </>
   );

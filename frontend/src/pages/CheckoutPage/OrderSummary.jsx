@@ -2,7 +2,12 @@ import dayjs from "dayjs";
 import { formatMoney } from "../../utils/money.jsx";
 import { DeliveryOptions } from "./DeliveryOptions.jsx";
 
-function OrderSummary({ deliveryOptions, cart, handleDeliveryOptionChange }) {
+function OrderSummary({
+  deliveryOptions,
+  cart,
+  handleDeliveryOptionChange,
+  updatingDelivery,
+}) {
   return (
     <div className="order-summary">
       {deliveryOptions.length > 0 &&
@@ -16,13 +21,22 @@ function OrderSummary({ deliveryOptions, cart, handleDeliveryOptionChange }) {
             <div key={cartItem.productId} className="cart-item-container">
               <div className="delivery-date">
                 Delivery date:{" "}
-                {dayjs()
-                  .add(selectedDeliveryOptions.estimatedDeliveryTimeMs)
-                  .format("dddd, MMMM D")}
+                {selectedDeliveryOptions
+                  ? dayjs()
+                      .add(
+                        selectedDeliveryOptions.estimatedDeliveryTimeMs,
+                        "millisecond",
+                      )
+                      .format("dddd, MMMM D")
+                  : "Calculating..."}
               </div>
 
               <div className="cart-item-details-grid">
-                <img className="product-image" src={cartItem.product.image} />
+                <img
+                  className="product-image"
+                  src={cartItem.product.image}
+                  alt={cartItem.product.name || "Product image"}
+                />
 
                 <div className="cart-item-details">
                   <div className="product-name">{cartItem.product.name}</div>
@@ -48,6 +62,7 @@ function OrderSummary({ deliveryOptions, cart, handleDeliveryOptionChange }) {
                   deliveryOptions={deliveryOptions}
                   cartItem={cartItem}
                   handleDeliveryOptionChange={handleDeliveryOptionChange}
+                  disabled={updatingDelivery}
                 />
               </div>
             </div>

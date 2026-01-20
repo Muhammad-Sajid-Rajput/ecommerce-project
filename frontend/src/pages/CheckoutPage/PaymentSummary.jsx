@@ -1,6 +1,6 @@
 import { formatMoney } from "../../utils/money.jsx";
 
-function PaymentSummary({ paymentSummary }) {
+function PaymentSummary({ paymentSummary, onPlaceOrder = () => {} }) {
   return (
     <div className="payment-summary">
       <div className="payment-summary-title">Payment Summary</div>
@@ -42,7 +42,11 @@ function PaymentSummary({ paymentSummary }) {
             </div>
           </div>
 
-          <button className="place-order-button button-primary">
+          <button
+            className="place-order-button button-primary"
+            onClick={onPlaceOrder}
+            type="button"
+          >
             Place your order
           </button>
         </>

@@ -76,7 +76,12 @@ function OrdersPage() {
                           <div className="product-quantity">
                             Quantity: {orderProduct.quantity}
                           </div>
-                          <button className="buy-again-button button-primary">
+                          <button
+                            className="buy-again-button button-primary"
+                            onClick={() =>
+                              console.log("Buy again", orderProduct.id)
+                            }
+                          >
                             <img
                               className="buy-again-icon"
                               src={BuyAgainIcon}
@@ -88,11 +93,14 @@ function OrdersPage() {
                         </div>
 
                         <div className="product-actions">
-                          <a href="/tracking">
-                            <button className="track-package-button button-secondary">
-                              Track package
-                            </button>
-                          </a>
+                          <button
+                            className="track-package-button button-secondary"
+                            onClick={() =>
+                              (window.location.href = `/tracking?orderId=${order.id}`)
+                            }
+                          >
+                            Track package
+                          </button>
                         </div>
                       </Fragment>
                     );

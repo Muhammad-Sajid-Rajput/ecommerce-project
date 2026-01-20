@@ -1,14 +1,30 @@
 import { formatMoney } from "../../utils/money";
 import CheckmarkIcon from "../../assets/images/icons/checkmark.png";
+import { useState } from "react";
 
-function ProductsGrid({ products }) {
+function ProductsGrid({ products, onAddToCart }) {
+  const [quantities, setQuantities] = useState({});
+  const [addedToCart, setAddedToCart] = useState({});
+
+  const handleAddToCart = (productId) => {
+    const quantity = quantities[productId] || 1;
+    if (onAddToCart) {
+      onAddToCart(productId, quantity);
+      setAddedToCart((prev) => ({ ...prev, [productId]: true }));
+    }
+  };
+
   return (
     <div className="products-grid">
-      {products.map((product) => {
+      {(products || []).map((product) => {
         return (
           <div key={product.id} className="product-container">
             <div className="product-image-container">
-              <img className="product-image" src={product.image} />
+              <img
+                className="product-image"
+                src={product.image}
+                alt={product.name || "Product image"}
+              />
             </div>
 
             <div className="product-name limit-text-to-2-lines">
@@ -19,6 +35,7 @@ function ProductsGrid({ products }) {
               <img
                 className="product-rating-stars"
                 src={`images/ratings/rating-${product.rating.stars * 10}.png`}
+                alt={`Rating: ${product.rating.stars} out of 5`}
               />
               <div className="product-rating-count link-primary">
                 {product.rating.count}
@@ -30,7 +47,15 @@ function ProductsGrid({ products }) {
             </div>
 
             <div className="product-quantity-container">
-              <select>
+              <select
+                value={quantities[product.id] || 1}
+                onChange={(e) =>
+                  setQuantities((prev) => ({
+                    ...prev,
+                    [product.id]: Number(e.target.value),
+                  }))
+                }
+              >
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -46,12 +71,17 @@ function ProductsGrid({ products }) {
 
             <div className="product-spacer"></div>
 
-            <div className="added-to-cart">
-              <img src={CheckmarkIcon} />
-              Added
-            </div>
+            {addedToCart[product.id] && (
+              <div className="added-to-cart">
+                <img src={CheckmarkIcon} alt="added" />
+                Added
+              </div>
+            )}
 
-            <button className="add-to-cart-button button-primary">
+            <button
+              className="add-to-cart-button button-primary"
+              onClick={() => handleAddToCart(product.id)}
+            >
               Add to Cart
             </button>
           </div>
