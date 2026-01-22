@@ -2,12 +2,7 @@ import { DeliveryOptions } from "./DeliveryOptions.jsx";
 import { CartItemDetails } from "./CartItemDetails.jsx";
 import { DeliveryDate } from "./DeliveryDate.jsx";
 
-function OrderSummary({
-  deliveryOptions,
-  cart,
-  handleDeliveryOptionChange,
-  updatingDelivery,
-}) {
+function OrderSummary({ deliveryOptions, cart, loadCart }) {
   return (
     <div className="order-summary">
       {deliveryOptions.length > 0 &&
@@ -19,12 +14,11 @@ function OrderSummary({
                 deliveryOptions={deliveryOptions}
               />
               <div className="cart-item-details-grid">
-                <CartItemDetails cartItem={cartItem} />
+                <CartItemDetails cartItem={cartItem} loadCart={loadCart} />
                 <DeliveryOptions
                   deliveryOptions={deliveryOptions}
                   cartItem={cartItem}
-                  handleDeliveryOptionChange={handleDeliveryOptionChange}
-                  disabled={updatingDelivery}
+                  loadCart={loadCart}
                 />
               </div>
             </div>

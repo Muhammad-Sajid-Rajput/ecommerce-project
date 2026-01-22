@@ -8,23 +8,65 @@ import axios from "axios";
 function TrackingPage({ cart }) {
   const { orderId, productId } = useParams();
   const [order, setOrder] = useState(null);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchTrackingInfo = async () => {
-      const response = await axios.get(
-        `/api/orders/${orderId}?expand=products`,
-      );
-      setOrder(response.data);
+      try {
+        setError(null);
+        setLoading(true);
+        const response = await axios.get(
+          `/api/orders/${orderId}?expand=products`,
+        );
+        setOrder(response.data);
+      } catch (err) {
+        setError(err);
+        setOrder(null);
+      } finally {
+        setLoading(false);
+      }
     };
     fetchTrackingInfo();
   }, [orderId]);
+
+  if (loading) {
+    return (
+      <>
+        <Header cart={cart} />
+        <div className="tracking-page">
+          <div className="order-tracking">
+            <div className="product-info">Loading...</div>
+          </div>
+        </div>
+      </>
+    );
+  }
+
+  if (error) {
+    return (
+      <>
+        <Header cart={cart} />
+        <div className="tracking-page">
+          <div className="order-tracking">
+            <Link className="back-to-orders-link link-primary" to="/orders">
+              View all orders
+            </Link>
+            <div className="product-info">
+              Error loading tracking information. Please try again later.
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  }
 
   if (!order) {
     return null;
   }
 
   const orderProduct = order.products?.find((orderProduct) => {
-    return orderProduct.productId === productId;
+    return orderProduct.product.id === productId;
   });
 
   if (!orderProduct) {
@@ -48,9 +90,12 @@ function TrackingPage({ cart }) {
 
   const timePassedMs = dayjs().valueOf() - order.orderTimeMs;
 
-  let deliveryPercent = (timePassedMs / totalDeliveryTimeMs) * 100;
-  if (deliveryPercent > 100) {
-    deliveryPercent = 100;
+  let deliveryPercent;
+  if (totalDeliveryTimeMs <= 0) {
+    deliveryPercent = timePassedMs >= 0 ? 100 : 0;
+  } else {
+    deliveryPercent = (timePassedMs / totalDeliveryTimeMs) * 100;
+    deliveryPercent = Math.max(0, Math.min(100, deliveryPercent));
   }
 
   const isPreparing = deliveryPercent < 33;
@@ -84,15 +129,15 @@ function TrackingPage({ cart }) {
 
           <div className="progress-labels-container">
             <div
-              className={`progress-label ${isPreparing && "current-status"}`}
+              className={`progress-label ${isPreparing ? "current-status" : ""}`}
             >
               Preparing
             </div>
-            <div className={`progress-label ${isShipped && "current-status"}`}>
+            <div className={`progress-label ${isShipped ? "current-status" : ""}`}>
               Shipped
             </div>
             <div
-              className={`progress-label ${isDelivered && "current-status"}`}
+              className={`progress-label ${isDelivered ? "current-status" : ""}`}
             >
               Delivered
             </div>

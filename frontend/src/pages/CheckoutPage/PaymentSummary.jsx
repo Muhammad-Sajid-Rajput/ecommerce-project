@@ -1,6 +1,19 @@
 import { formatMoney } from "../../utils/money.jsx";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-function PaymentSummary({ paymentSummary, onPlaceOrder = () => {} }) {
+function PaymentSummary({ paymentSummary, loadCart }) {
+  const navigate = useNavigate();
+  const onPlaceOrder = async () => {
+    try {
+      await axios.post("/api/orders");
+    } catch (error) {
+      console.error("Error placing order:", error);
+      return;
+    }
+    await loadCart();
+    navigate("/orders");
+  };
   return (
     <div className="payment-summary">
       <div className="payment-summary-title">Payment Summary</div>

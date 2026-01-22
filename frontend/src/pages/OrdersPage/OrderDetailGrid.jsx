@@ -28,9 +28,9 @@ function OrderDetailsGrid({ order }) {
               </div>
               <button
                 className="buy-again-button button-primary"
-                onClick={() => console.log("Buy again", orderProduct.id)}
+                onClick={() => console.log("Buy again", orderProduct.product.id)}
               >
-                <img className="buy-again-icon" src={BuyAgainIcon} />
+                <img className="buy-again-icon" src={BuyAgainIcon} alt="" />
                 <span className="buy-again-message">Add to Cart</span>
               </button>
             </div>
@@ -39,7 +39,7 @@ function OrderDetailsGrid({ order }) {
               <button
                 className="track-package-button button-secondary"
                 onClick={() =>
-                  navigate(`/tracking/${order.id}/${orderProduct.productId}`)
+                  navigate(`/tracking/${order.id}/${orderProduct.product.id}`)
                 }
               >
                 Track package

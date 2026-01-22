@@ -5,11 +5,10 @@ import { CheckoutHeader } from "./checkout-header.jsx";
 import { OrderSummary } from "./OrderSummary.jsx";
 import { PaymentSummary } from "./PaymentSummary.jsx";
 
-function CheckoutPage({ cart, setCart }) {
-  const [deliveryOptions, setDeliveryOptions] = useState([]);
-  const [paymentSummary, setPaymentSummary] = useState(null);
-  const [updatingDelivery, setUpdatingDelivery] = useState(false);
 
+function CheckoutPage({ cart, loadCart }) {
+  const [paymentSummary, setPaymentSummary] = useState(null);
+  const [deliveryOptions, setDeliveryOptions] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -17,7 +16,6 @@ function CheckoutPage({ cart, setCart }) {
           "/api/delivery-options?expand=estimatedDeliveryTime",
         );
         setDeliveryOptions(deliveryResponse.data);
-
         const paymentResponse = await axios.get("/api/payment-summary");
         setPaymentSummary(paymentResponse.data);
       } catch (error) {
@@ -26,33 +24,7 @@ function CheckoutPage({ cart, setCart }) {
     };
 
     fetchData();
-  }, []);
-
-  const handlePlaceOrder = () => {
-    // TODO: Implement order submission logic
-    console.log("Placing order...");
-  };
-
-  const handleDeliveryOptionChange = async (cartItemId, deliveryOptionId) => {
-    if (updatingDelivery) return;
-    setUpdatingDelivery(true);
-    try {
-      await axios.put(`/api/cart-items/${cartItemId}`, {
-        deliveryOptionId,
-      });
-      // Refetch cart to update the UI
-      const cartResponse = await axios.get("/api/cart-items?expand=product");
-      setCart(cartResponse.data);
-
-      // Refetch payment summary to update shipping costs
-      const paymentResponse = await axios.get("/api/payment-summary");
-      setPaymentSummary(paymentResponse.data);
-    } catch (error) {
-      console.error("Error updating delivery option:", error);
-    } finally {
-      setUpdatingDelivery(false);
-    }
-  };
+  }, [cart]);
 
   return (
     <>
@@ -66,13 +38,9 @@ function CheckoutPage({ cart, setCart }) {
           <OrderSummary
             deliveryOptions={deliveryOptions}
             cart={cart}
-            handleDeliveryOptionChange={handleDeliveryOptionChange}
-            updatingDelivery={updatingDelivery}
+            loadCart={loadCart}
           />
-          <PaymentSummary
-            paymentSummary={paymentSummary}
-            onPlaceOrder={handlePlaceOrder}
-          />
+          <PaymentSummary paymentSummary={paymentSummary} loadCart={loadCart} />
         </div>
       </div>
     </>

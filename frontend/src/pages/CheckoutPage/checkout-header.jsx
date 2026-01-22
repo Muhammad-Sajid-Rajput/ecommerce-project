@@ -5,11 +5,9 @@ import Logo from '../../assets/images/logo.png';
 import MobileLogo from '../../assets/images/mobile-logo.png';
 
 function CheckoutHeader({ cart }) {
-  let totalQuantity = 0;
-
-  cart.forEach((cartItem) => {
-    totalQuantity += cartItem.quantity;
-  });
+  const totalQuantity = (cart ?? []).reduce((total, cartItem) => {
+    return total + (cartItem.quantity || 0);
+  }, 0);
   return (
     <div className="checkout-header">
       <div className="header-content">

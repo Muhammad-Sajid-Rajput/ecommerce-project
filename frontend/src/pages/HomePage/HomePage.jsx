@@ -3,31 +3,30 @@ import { Header } from "../../components/Header.jsx";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { ProductsGrid } from "./ProductsGrid.jsx";
-function HomePage({ cart, setCart }) {
+
+function HomePage({ cart, loadCart }) {
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
+        setLoading(true);
+        setError(null);
         const response = await axios.get("/api/products");
-        setProducts(response.data);
+        setProducts(response.data || []);
       } catch (error) {
         console.error("Error fetching products:", error);
+        setError(error);
+        setProducts([]);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchProducts();
   }, []);
-
-  const handleAddToCart = async (productId, quantity) => {
-    try {
-      await axios.post("/api/cart-items", { productId, quantity });
-      const response = await axios.get("/api/cart-items?expand=product");
-      setCart(response.data);
-    } catch (error) {
-      console.error("Error adding to cart:", error);
-    }
-  };
 
   useEffect(() => {
     document.title = "Ecommerce Project";
@@ -38,7 +37,13 @@ function HomePage({ cart, setCart }) {
       <Header cart={cart} />
 
       <div className="home-page">
-        <ProductsGrid products={products} onAddToCart={handleAddToCart} />
+        {loading && <div style={{ padding: "20px", textAlign: "center" }}>Loading products...</div>}
+        {error && (
+          <div style={{ padding: "20px", textAlign: "center", color: "red" }}>
+            Error loading products. Please try again later.
+          </div>
+        )}
+        {!loading && !error && <ProductsGrid products={products} loadCart={loadCart} />}
       </div>
     </>
   );

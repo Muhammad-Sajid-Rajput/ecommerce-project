@@ -10,26 +10,27 @@ import { useState, useEffect } from "react";
 
 function App() {
   const [cart, setCart] = useState([]);
-
+  const loadCart = async () => {
+    try {
+      const response = await axios.get("/api/cart-items?expand=product");
+      setCart(response.data);
+    } catch (error) {
+      console.error("Error fetching cart data:", error);
+    }
+  };
   useEffect(() => {
-    const fetchCart = async () => {
-      try {
-        const response = await axios.get("/api/cart-items?expand=product");
-        setCart(response.data);
-      } catch (error) {
-        console.error("Error fetching cart data:", error);
-      }
-    };
-
-    fetchCart();
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    loadCart();
   }, []);
 
   return (
     <Routes>
-      <Route index element={<HomePage cart={cart} setCart={setCart} />} />
+      <Route index element={<HomePage cart={cart} loadCart={loadCart} />} />
       <Route
         path="/checkout"
-        element={<CheckoutPage cart={cart} setCart={setCart} />}
+        element={
+          <CheckoutPage cart={cart} setCart={setCart} loadCart={loadCart} />
+        }
       />
       <Route path="/orders" element={<OrdersPage cart={cart} />} />
       <Route
