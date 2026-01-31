@@ -5,7 +5,6 @@ import { CheckoutHeader } from "./checkout-header.jsx";
 import { OrderSummary } from "./OrderSummary.jsx";
 import { PaymentSummary } from "./PaymentSummary.jsx";
 
-
 function CheckoutPage({ cart, loadCart }) {
   const [paymentSummary, setPaymentSummary] = useState(null);
   const [deliveryOptions, setDeliveryOptions] = useState([]);
@@ -16,14 +15,24 @@ function CheckoutPage({ cart, loadCart }) {
           "/api/delivery-options?expand=estimatedDeliveryTime",
         );
         setDeliveryOptions(deliveryResponse.data);
-        const paymentResponse = await axios.get("/api/payment-summary");
-        setPaymentSummary(paymentResponse.data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
 
     fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchPaymentSummary = async () => {
+      try {
+        const paymentResponse = await axios.get("/api/payment-summary");
+        setPaymentSummary(paymentResponse.data);
+      } catch (error) {
+        console.error("Error fetching payment summary:", error);
+      }
+    };
+    fetchPaymentSummary();
   }, [cart]);
 
   return (
