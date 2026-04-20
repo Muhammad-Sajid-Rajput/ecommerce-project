@@ -1,162 +1,244 @@
-# E-Commerce Project
+# 🛒 Full-Stack E-Commerce Application
 
-A full-stack e-commerce application built with React (frontend) and Express.js (backend).
+[![React](https://img.shields.io/badge/React-19-61DAFB?logo=react)](https://react.dev/)
+[![Express](https://img.shields.io/badge/Express-4.21.2-000000?logo=express)](https://expressjs.com/)
+[![Sequelize](https://img.shields.io/badge/Sequelize-6.6.5-52B0E7?logo=sequelize)](https://sequelize.org/)
+[![SQLite](https://img.shields.io/badge/SQLite-3-003B57?logo=sqlite)](https://sqlite.org/)
 
-## Overview
+A production-ready, full-stack e-commerce solution built with modern web technologies. Features a responsive React frontend and a robust Express.js backend with SQLite database.
 
-This project is a complete e-commerce solution featuring product browsing, shopping cart management, checkout flow, order tracking, and order history. The application uses a RESTful API architecture with SQLite database for data persistence.
+---
 
-## Tech Stack
+## 📋 Table of Contents
+
+- [Overview](#-overview)
+- [System Architecture](#-system-architecture)
+- [Tech Stack](#-tech-stack)
+- [Features](#-features)
+- [Quick Start](#-quick-start)
+- [Project Structure](#-project-structure)
+- [Documentation](#-documentation)
+- [Author](#-author)
+
+---
+
+## 🎯 Overview
+
+This e-commerce platform provides a complete online shopping experience with:
+
+- **Product Discovery** – Browse and search a catalog of products
+- **Shopping Cart** – Manage items with quantity controls and delivery options
+- **Checkout Flow** – Seamless order placement with cost breakdown
+- **Order Management** – View history and track order status
+- **Responsive UI** – Mobile-first design for all devices
+
+---
+
+## 🏗️ System Architecture
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                        CLIENT LAYER                          │
+│  ┌─────────────────┐  React 19 + React Router 7 + Vite 7    │
+│  │   Browser       │  → Responsive UI                         │
+│  └─────────────────┘  → Axios for API calls                   │
+└────────────────────────────────┬──────────────────────────────┘
+                                 │ HTTP/REST
+                                 ↓
+┌─────────────────────────────────────────────────────────────┐
+│                        API LAYER                           │
+│  ┌─────────────────┐  Express.js 4.21.2                     │
+│  │   Server        │  → REST API endpoints                   │
+│  │   Port: 3000    │  → CORS enabled                         │
+│  └─────────────────┘  → Static file serving                  │
+└────────────────────────────────┬──────────────────────────────┘
+                                 │ Sequelize ORM
+                                 ↓
+┌─────────────────────────────────────────────────────────────┐
+│                      DATA LAYER                            │
+│  ┌─────────────────┐  SQLite (via sql.js)                   │
+│  │   Database      │  → Products, Cart, Orders, Delivery     │
+│  │   database.sqlite│  → Auto-seeded with default data       │
+│  └─────────────────┘                                        │
+└─────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 🛠️ Tech Stack
 
 ### Frontend
-- **React 19** - UI library
-- **React Router DOM 7** - Client-side routing
-- **Vite 7** - Build tool and dev server
-- **Axios** - HTTP client for API requests
-- **Day.js** - Date formatting library
+| Technology | Version | Purpose |
+|------------|---------|---------|
+| React | 19.2.0 | UI library |
+| React Router DOM | 7.11.0 | Client-side routing |
+| Vite | 7.2.4 | Build tool & dev server |
+| Axios | 1.13.2 | HTTP client |
+| Day.js | 1.11.19 | Date formatting |
 
 ### Backend
-- **Express.js 4** - Web framework
-- **Sequelize 6** - ORM for database operations
-- **SQLite** - Database (via sql.js)
-- **CORS** - Cross-origin resource sharing
-- **PostgreSQL** - Supported via pg driver
+| Technology | Version | Purpose |
+|------------|---------|---------|
+| Node.js | 18+ | Runtime environment |
+| Express.js | 4.21.2 | Web framework |
+| Sequelize | 6.6.5 | ORM |
+| SQLite | 3 | Database |
+| CORS | 2.8.5 | Cross-origin requests |
 
-## Project Structure
+---
 
-```
-ecommerce-project/
-├── backend/                 # Express.js backend
-│   ├── models/             # Sequelize models (Product, CartItem, Order, DeliveryOption)
-│   ├── routes/             # API route handlers
-│   ├── defaultData/        # Default seed data
-│   ├── images/             # Product images
-│   ├── server.js           # Main server entry
-│   └── database.sqlite     # SQLite database file
-│
-└── frontend/               # React frontend
-    ├── src/
-    │   ├── pages/          # Page components
-    │   │   ├── HomePage/       # Product listing
-    │   │   ├── ProductDetailsPage/  # Product details
-    │   │   ├── CheckoutPage/   # Checkout flow
-    │   │   ├── OrdersPage/     # Order history
-    │   │   ├── TrackingPage/   # Order tracking
-    │   │   └── NotFoundPage/   # 404 page
-    │   ├── components/     # Reusable components (Header, Footer)
-    │   ├── context/        # React context providers
-    │   ├── hooks/          # Custom React hooks
-    │   ├── utils/          # Utility functions
-    │   └── assets/         # Static assets
-    ├── index.html          # HTML entry point
-    └── vite.config.js      # Vite configuration
-```
+## ✨ Features
 
-## Features
+### Frontend Features
+- 🏠 **Home Page** – Product grid with search functionality
+- 🔍 **Product Search** – Filter by name or keywords
+- 📦 **Product Details** – Full product view with add-to-cart
+- 🛒 **Shopping Cart** – Add, update, remove items
+- 💳 **Checkout** – Delivery options and payment summary
+- 📜 **Order History** – View past orders with details
+- 🚚 **Order Tracking** – Real-time delivery status
+- 📱 **Responsive Design** – Mobile, tablet, desktop support
 
-- **Product Catalog** - Browse products with images, prices, and ratings
-- **Product Details** - View detailed product information
-- **Shopping Cart** - Add/remove items, update quantities
-- **Checkout** - Delivery options and payment summary
-- **Order Management** - View order history and track orders
-- **Order Tracking** - Real-time order status tracking
-- **Responsive Design** - Mobile-friendly interface
+### Backend Features
+- 🌐 **REST API** – Complete CRUD operations
+- 🔎 **Product Search** – Full-text search endpoint
+- 🛒 **Cart Management** – Persistent cart storage
+- 📦 **Order Processing** – Automated checkout flow
+- 💰 **Payment Calculation** – Tax and shipping costs
+- 🗄️ **Database Seeding** – Auto-populate default data
+- 🖼️ **Static Assets** – Image serving for products
+- 🔒 **Error Handling** – Centralized error middleware
 
-## API Endpoints
+---
 
-| Endpoint | Description |
-|----------|-------------|
-| `GET /api/products` | Get all products |
-| `GET /api/delivery-options` | Get delivery options |
-| `GET /api/cart-items` | Get cart items |
-| `POST /api/cart-items` | Add item to cart |
-| `PUT /api/cart-items/:id` | Update cart item |
-| `DELETE /api/cart-items/:id` | Remove from cart |
-| `GET /api/orders` | Get all orders |
-| `POST /api/orders` | Create new order |
-| `GET /api/payment-summary` | Get payment summary |
-| `POST /api/reset` | Reset database |
-
-## Getting Started
+## 🚀 Quick Start
 
 ### Prerequisites
-- Node.js 18+ 
-- npm or pnpm
+- Node.js 18+ installed
+- npm or pnpm package manager
 
 ### Installation
 
-1. **Clone the repository**
-   ```bash
-   git clone <repository-url>
-   cd ecommerce-project
-   ```
+```bash
+# 1. Clone the repository
+git clone <repository-url>
+cd ecommerce-project
 
-2. **Install backend dependencies**
-   ```bash
-   cd backend
-   npm install
-   ```
+# 2. Install & start backend
+cd backend
+npm install
+npm run dev
 
-3. **Install frontend dependencies**
-   ```bash
-   cd ../frontend
-   npm install
-   ```
+# 3. In a new terminal, install & start frontend
+cd ../frontend
+npm install
+npm run dev
+```
 
-### Running the Application
+### Access the Application
+- **Frontend**: http://localhost:5173
+- **Backend API**: http://localhost:3000
+- **API Documentation**: See [Backend README](./backend/README.md)
 
-1. **Start the backend server** (from `backend/` directory)
-   ```bash
-   npm run dev
-   ```
-   Server runs on `http://localhost:3000`
+---
 
-2. **Start the frontend dev server** (from `frontend/` directory)
-   ```bash
-   npm run dev
-   ```
-   Frontend runs on `http://localhost:5173`
+## 📂 Project Structure
 
-3. **Open the application**
-   Navigate to `http://localhost:5173` in your browser
+```
+ecommerce-project/
+├── 📁 frontend/              # React Frontend
+│   ├── 📁 src/
+│   │   ├── 📁 components/    # Reusable UI (Header, Footer)
+│   │   ├── 📁 pages/         # Route pages (Home, Checkout, Orders, Tracking)
+│   │   ├── 📁 context/       # React Context (Toast notifications)
+│   │   ├── 📁 hooks/         # Custom React hooks
+│   │   ├── 📁 utils/         # Utility functions
+│   │   ├── App.jsx           # Main app component
+│   │   └── main.jsx          # Entry point
+│   ├── package.json          # Frontend dependencies
+│   └── README.md             # Frontend documentation
+│
+├── 📁 backend/               # Express Backend
+│   ├── 📁 models/            # Sequelize models
+│   │   ├── Product.js        # Product schema
+│   │   ├── CartItem.js       # Cart item schema
+│   │   ├── Order.js          # Order schema
+│   │   └── DeliveryOption.js # Shipping options schema
+│   ├── 📁 routes/            # API route handlers
+│   │   ├── products.js       # Product endpoints
+│   │   ├── cartItems.js      # Cart endpoints
+│   │   ├── orders.js         # Order endpoints
+│   │   ├── deliveryOptions.js
+│   │   ├── paymentSummary.js
+│   │   └── reset.js
+│   ├── 📁 defaultData/       # Database seed data
+│   ├── 📁 images/            # Product images
+│   ├── server.js             # Server entry point
+│   ├── database.sqlite       # SQLite database
+│   └── README.md             # Backend documentation
+│
+└── README.md                 # This file
+```
 
-### Build for Production
+---
 
-1. **Build frontend**
-   ```bash
-   cd frontend
-   npm run build
-   ```
+## 📚 Documentation
 
-2. **Deploy**
-   Copy `frontend/dist` contents to your web server, or serve directly from the backend which includes static file serving.
+| Component | Documentation | Description |
+|-----------|--------------|-------------|
+| **Frontend** | [frontend/README.md](./frontend/README.md) | React app setup, components, routing |
+| **Backend** | [backend/README.md](./backend/README.md) | API reference, models, deployment |
 
-## Available Scripts
+---
 
-### Backend
-- `npm start` - Start production server
-- `npm run dev` - Start development server with nodemon
-- `npm run zip` - Create project archive
+## 📡 API Summary
 
-### Frontend
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run preview` - Preview production build
-- `npm run lint` - Run ESLint
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `GET` | `/api/products` | List all products |
+| `GET` | `/api/products?search=query` | Search products |
+| `GET` | `/api/cart-items` | Get cart items |
+| `POST` | `/api/cart-items` | Add to cart |
+| `PUT` | `/api/cart-items/:id` | Update cart item |
+| `DELETE` | `/api/cart-items/:id` | Remove from cart |
+| `GET` | `/api/orders` | List orders |
+| `POST` | `/api/orders` | Create order |
+| `GET` | `/api/payment-summary` | Get checkout costs |
+| `POST` | `/api/reset` | Reset database |
 
-## Database
+**Full API documentation**: [backend/README.md](./backend/README.md#-api-endpoints)
 
-The application uses SQLite with Sequelize ORM. Default data is automatically seeded on first run including:
-- Sample products with images
-- Delivery options
-- Empty cart
-- Sample orders
+---
 
-## Environment Variables
+## 🛣️ Roadmap
 
-The backend uses the following environment variables (optional):
-- `PORT` - Server port (default: 3000)
+Potential enhancements for future development:
 
-## License
+- [ ] User authentication (JWT)
+- [ ] Admin dashboard
+- [ ] Payment gateway integration
+- [ ] Product reviews & ratings
+- [ ] Wishlist functionality
+- [ ] Email notifications
+- [ ] Inventory management
 
-ISC
+---
+
+## 👨‍💻 Author
+
+**Muhammad Sajid**
+- 🎓 **University**: Mehran University of Engineering and Technology
+- 💼 **Role**: Full Stack Developer
+- 📋 **Project**: Final Year Project – E-Commerce Web Application
+
+---
+
+## 📄 License
+
+ISC License © 2025 Muhammad Sajid
+
+---
+
+<div align="center">
+  <sub>Built with ❤️ using React & Express.js</sub>
+</div>
