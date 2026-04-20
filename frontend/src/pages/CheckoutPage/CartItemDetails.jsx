@@ -38,7 +38,7 @@ function CartItemDetails({ cartItem, loadCart }) {
     }
     setQuantity(newQuantity);
   };
-  const handelQuantityKeyDown = async (event) => {
+  const handleQuantityKeyDown = async (event) => {
     if (event.key === "Enter") {
       await updateQuantity();
     } else if (event.key === "Escape") {
@@ -70,7 +70,7 @@ function CartItemDetails({ cartItem, loadCart }) {
                 defaultValue={cartItem.quantity}
                 value={quantity}
                 onChange={updateQuantityInput}
-                onKeyDown={handelQuantityKeyDown}
+                onKeyDown={handleQuantityKeyDown}
               />
             ) : (
               <span className="quantity-label">{cartItem.quantity}</span>

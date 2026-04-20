@@ -2,8 +2,6 @@ import { NavLink, useNavigate, useSearchParams } from "react-router-dom";
 import "./header.css";
 import CartIcon from "../assets/images/icons/cart-icon.png";
 import SearchIcon from "../assets/images/icons/search-icon.png";
-import LogoWhite from "../assets/images/logo-white.png";
-import MobileLogoWhite from "../assets/images/mobile-logo-white.png";
 import { useState } from "react";
 
 function Header({ cart }) {
@@ -32,8 +30,7 @@ function Header({ cart }) {
       <div className="header">
         <div className="left-section">
           <NavLink to="/" className="header-link">
-            <img className="logo" src={LogoWhite} />
-            <img className="mobile-logo" src={MobileLogoWhite} />
+            <span className="logo-text">Amazon clone</span>
           </NavLink>
         </div>
 
@@ -44,6 +41,7 @@ function Header({ cart }) {
             placeholder="Search"
             value={search}
             onChange={updateSearchInput}
+            onKeyDown={(e) => e.key === "Enter" && searchProducts()}
           />
 
           <button className="search-button" onClick={searchProducts}>

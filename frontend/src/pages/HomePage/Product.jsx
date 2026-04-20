@@ -2,10 +2,13 @@ import axios from "axios";
 import { formatMoney } from "../../utils/money.jsx";
 import CheckmarkIcon from "../../assets/images/icons/checkmark.png";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { useToast } from "../../hooks/useToast.js";
 
 function Product({ product, loadCart }) {
   const [quantities, setQuantities] = useState(1);
   const [addedToCart, setAddedToCart] = useState(false);
+  const { addToast } = useToast();
 
   const handleAddToCart = async () => {
     if (!product || !product.id) {
@@ -19,8 +22,10 @@ function Product({ product, loadCart }) {
       });
       await loadCart();
       setAddedToCart(true);
+      addToast(`${product.name} added to cart!`, "success");
     } catch (error) {
       console.error("Error adding product to cart:", error);
+      addToast("Failed to add item to cart. Please try again.", "error");
     }
   };
 
@@ -41,14 +46,21 @@ function Product({ product, loadCart }) {
   return (
     <div className="product-container">
       <div className="product-image-container">
-        <img
-          className="product-image"
-          src={product.image || ""}
-          alt={product.name || "Product image"}
-        />
+        <Link to={`/product/${product.id}`} className="product-link">
+          <img
+            className="product-image"
+            src={product.image || ""}
+            alt={product.name || "Product image"}
+            loading="lazy"
+          />
+        </Link>
       </div>
 
-      <div className="product-name limit-text-to-2-lines">{product.name || ""}</div>
+      <Link to={`/product/${product.id}`} className="product-link">
+        <div className="product-name limit-text-to-2-lines">
+          {product.name || ""}
+        </div>
+      </Link>
 
       {product.rating && (
         <div className="product-rating-container">
@@ -63,7 +75,9 @@ function Product({ product, loadCart }) {
         </div>
       )}
 
-      <div className="product-price">{formatMoney(product.priceCents || 0)}</div>
+      <div className="product-price">
+        {formatMoney(product.priceCents || 0)}
+      </div>
 
       <div className="product-quantity-container">
         <select value={quantities} onChange={handleQuantityChange}>

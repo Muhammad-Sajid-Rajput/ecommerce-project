@@ -38,25 +38,11 @@
   border: 1px solid white;
 }
 
-.header .logo {
-  height: 26px;
-  margin-top: 1px;
-}
-
-.header .mobile-logo {
-  display: none;
-}
-
-@media (max-width: 675px) {
-  .header .logo {
-    display: none;
-  }
-
-  .header .mobile-logo {
-    display: block;
-    height: 26px;
-    margin-top: 1px;
-  }
+.header .logo-text {
+  font-size: 20px;
+  font-weight: 700;
+  color: white;
+  white-space: nowrap;
 }
 
 .header .middle-section {

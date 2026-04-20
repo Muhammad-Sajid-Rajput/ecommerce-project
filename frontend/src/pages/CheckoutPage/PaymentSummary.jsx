@@ -2,9 +2,12 @@ import { formatMoney } from "../../utils/money.jsx";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-function PaymentSummary({ paymentSummary, loadCart }) {
+function PaymentSummary({ paymentSummary, loadCart, cart }) {
   const navigate = useNavigate();
+  const isEmpty = !cart || cart.length === 0;
+
   const onPlaceOrder = async () => {
+    if (isEmpty) return;
     try {
       await axios.post("/api/orders");
     } catch (error) {
@@ -14,11 +17,12 @@ function PaymentSummary({ paymentSummary, loadCart }) {
     await loadCart();
     navigate("/orders");
   };
+
   return (
     <div className="payment-summary">
       <div className="payment-summary-title">Payment Summary</div>
 
-      {paymentSummary && (
+      {paymentSummary && !isEmpty && (
         <>
           <div className="payment-summary-row">
             <div>Items ({paymentSummary.totalItems}):</div>
@@ -59,10 +63,17 @@ function PaymentSummary({ paymentSummary, loadCart }) {
             className="place-order-button button-primary"
             onClick={onPlaceOrder}
             type="button"
+            disabled={isEmpty}
           >
             Place your order
           </button>
         </>
+      )}
+
+      {isEmpty && (
+        <div className="empty-payment-message">
+          <p>Add items to your cart to see the payment summary.</p>
+        </div>
       )}
     </div>
   );

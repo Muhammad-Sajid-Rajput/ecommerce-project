@@ -49,7 +49,11 @@ function CheckoutPage({ cart, loadCart }) {
             cart={cart}
             loadCart={loadCart}
           />
-          <PaymentSummary paymentSummary={paymentSummary} loadCart={loadCart} />
+          <PaymentSummary
+            paymentSummary={paymentSummary}
+            loadCart={loadCart}
+            cart={cart}
+          />
         </div>
       </div>
     </>

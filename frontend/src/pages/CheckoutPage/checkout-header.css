@@ -26,13 +26,16 @@
   width: 200px;
 }
 
-.checkout-header .logo {
-  height: 26px;
-  margin-top: 0px;
+.checkout-header .checkout-header-link {
+  text-decoration: none;
+  color: rgb(33, 33, 33);
 }
 
-.checkout-header .mobile-logo {
-  display: none;
+.checkout-header .logo-text {
+  font-size: 20px;
+  font-weight: 700;
+  color: rgb(33, 33, 33);
+  white-space: nowrap;
 }
 
 /* @media is used to create responsive design (making the
@@ -44,13 +47,8 @@
     width: auto;
   }
 
-  .checkout-header .logo {
-    display: none;
-  }
-
-  .checkout-header .mobile-logo {
-    display: inline-block;
-    height: 26px;
+  .checkout-header .logo-text {
+    font-size: 16px;
   }
 }
 

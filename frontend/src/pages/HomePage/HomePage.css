@@ -1,55 +1,28 @@
 .home-page {
   margin-top: 60px;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
 }
 
 .home-page .products-grid {
   display: grid;
-
-  /* - In CSS Grid, 1fr means a column will take up the
-       remaining space in the grid.
-     - If we write 1fr 1fr ... 1fr; 8 times, this will
-       divide the grid into 8 columns, each taking up an
-       equal amount of the space.
-     - repeat(8, 1fr); is a shortcut for repeating "1fr"
-       8 times (instead of typing out "1fr" 8 times).
-       repeat(...) is a special property that works with
-       display: grid; */
-  grid-template-columns: repeat(8, 1fr);
+  /* Use minmax to prevent overflow and ensure responsive columns */
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  width: 100%;
+  max-width: 100%;
 }
 
-/* @media is used to create responsive design (making the
-   website look good on any screen size). This @media
-   means when the screen width is 2000px or less, we
-   will divide the grid into 7 columns instead of 8. */
-@media (max-width: 2000px) {
-  .home-page .products-grid {
-    grid-template-columns: repeat(7, 1fr);
-  }
-}
-
-/* This @media means when the screen width is 1600px or
-   less, we will divide the grid into 6 columns. */
+/* Responsive grid breakpoints using auto-fit for better flexibility */
 @media (max-width: 1600px) {
   .home-page .products-grid {
-    grid-template-columns: repeat(6, 1fr);
-  }
-}
-
-@media (max-width: 1300px) {
-  .home-page .products-grid {
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   }
 }
 
 @media (max-width: 1000px) {
   .home-page .products-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-@media (max-width: 800px) {
-  .home-page .products-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   }
 }
 
@@ -66,16 +39,13 @@
 }
 
 .home-page .product-container {
-  padding-top: 40px;
-  padding-bottom: 25px;
-  padding-left: 25px;
-  padding-right: 25px;
-
+  padding: 20px 15px;
   border-right: 1px solid rgb(240, 240, 240);
   border-bottom: 1px solid rgb(240, 240, 240);
-
   display: flex;
   flex-direction: column;
+  min-height: 380px;
+  height: 100%;
 }
 
 .home-page .product-image-container {
@@ -96,11 +66,18 @@
 }
 
 .home-page .product-name {
-  height: 40px;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
+  /* Limit to 2 lines with ellipsis */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  min-height: 40px;
+  line-height: 1.4;
+  font-size: 14px;
+  color: rgb(33, 33, 33);
 }
 
 .home-page .product-rating-container {
@@ -157,4 +134,19 @@
   padding: 8px;
   height: 34px;
   margin-top: 1px;
+}
+
+.home-page .product-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.home-page .product-link:hover .product-name {
+  color: rgb(25, 135, 84);
+}
+
+.home-page .product-link:hover .product-image {
+  transform: scale(1.02);
+  transition: transform 0.2s ease;
 }

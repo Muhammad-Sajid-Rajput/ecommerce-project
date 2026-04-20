@@ -215,3 +215,41 @@
   margin-left: 10px;
   text-align: center;
 }
+
+/* Empty Cart State */
+.empty-cart-message {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.empty-cart-icon {
+  font-size: 64px;
+  margin-bottom: 20px;
+}
+
+.empty-cart-message h2 {
+  margin: 0 0 10px;
+  font-size: 24px;
+}
+
+.empty-cart-message p {
+  color: rgb(100, 100, 100);
+  margin-bottom: 24px;
+}
+
+.continue-shopping-button {
+  display: inline-block;
+  padding: 12px 24px;
+  text-decoration: none;
+}
+
+.empty-payment-message {
+  text-align: center;
+  padding: 40px 20px;
+  color: rgb(100, 100, 100);
+}
+
+.place-order-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

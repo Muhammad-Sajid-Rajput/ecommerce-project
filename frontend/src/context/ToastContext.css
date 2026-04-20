@@ -1,0 +1,132 @@
+.toast-container {
+  position: fixed;
+  top: 80px;
+  right: 20px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  min-width: 300px;
+  max-width: 400px;
+  animation: slideIn 0.3s ease;
+  background: white;
+  pointer-events: auto;
+  will-change: transform, opacity;
+}
+
+/* Class added when toast is being removed */
+.toast-exit {
+  animation: slideOut 0.3s ease forwards;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+.toast-success {
+  border-left: 4px solid rgb(25, 135, 84);
+}
+
+.toast-error {
+  border-left: 4px solid rgb(220, 38, 38);
+}
+
+.toast-info {
+  border-left: 4px solid rgb(59, 130, 246);
+}
+
+.toast-warning {
+  border-left: 4px solid rgb(245, 158, 11);
+}
+
+.toast-icon {
+  font-size: 18px;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.toast-success .toast-icon {
+  color: rgb(25, 135, 84);
+}
+
+.toast-error .toast-icon {
+  color: rgb(220, 38, 38);
+}
+
+.toast-info .toast-icon {
+  color: rgb(59, 130, 246);
+}
+
+.toast-warning .toast-icon {
+  color: rgb(245, 158, 11);
+}
+
+.toast-message {
+  flex: 1;
+  font-size: 14px;
+  color: rgb(51, 51, 51);
+}
+
+.toast-close {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: rgb(150, 150, 150);
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.toast-close:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: rgb(100, 100, 100);
+}
+
+@media (max-width: 600px) {
+  .toast-container {
+    left: 10px;
+    right: 10px;
+    top: auto;
+    bottom: 20px;
+    flex-direction: column-reverse;
+  }
+
+  .toast {
+    min-width: unset;
+    max-width: unset;
+    width: 100%;
+  }
+}

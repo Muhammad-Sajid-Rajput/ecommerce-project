@@ -1,10 +1,11 @@
 import axios from "axios";
-import "./App.css";
 import { HomePage } from "./pages/HomePage/HomePage.jsx";
 import { CheckoutPage } from "./pages/CheckoutPage/checkout.jsx";
 import { OrdersPage } from "./pages/OrdersPage/orders.jsx";
-import { TrackingPage } from "./pages/tracking.jsx";
-import { NotFoundPage } from "./pages/NotFoundPage.jsx";
+import { TrackingPage } from "./pages/TrackingPage/TrackingPage.jsx";
+import { NotFoundPage } from "./pages/NotFoundPage/NotFoundPage.jsx";
+import { ProductDetailsPage } from "./pages/ProductDetailsPage/ProductDetailsPage.jsx";
+import { Footer } from "./components/Footer.jsx";
 import { Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 
@@ -24,22 +25,29 @@ function App() {
   }, []);
 
   return (
-    <Routes>
-      <Route index element={<HomePage cart={cart} loadCart={loadCart} />} />
-      <Route
-        path="/checkout"
-        element={<CheckoutPage cart={cart} loadCart={loadCart} />}
-      />
-      <Route
-        path="/orders"
-        element={<OrdersPage cart={cart} loadCart={loadCart} />}
-      />
-      <Route
-        path="/tracking/:orderId/:productId"
-        element={<TrackingPage cart={cart} />}
-      />
-      <Route path="*" element={<NotFoundPage cart={cart} />} />
-    </Routes>
+    <>
+      <Routes>
+        <Route index element={<HomePage cart={cart} loadCart={loadCart} />} />
+        <Route
+          path="/checkout"
+          element={<CheckoutPage cart={cart} loadCart={loadCart} />}
+        />
+        <Route
+          path="/orders"
+          element={<OrdersPage cart={cart} loadCart={loadCart} />}
+        />
+        <Route
+          path="/tracking/:orderId/:productId"
+          element={<TrackingPage cart={cart} />}
+        />
+        <Route
+          path="/product/:productId"
+          element={<ProductDetailsPage cart={cart} loadCart={loadCart} />}
+        />
+        <Route path="*" element={<NotFoundPage cart={cart} />} />
+      </Routes>
+      <Footer />
+    </>
   );
 }
 
