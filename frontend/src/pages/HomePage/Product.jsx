@@ -104,7 +104,7 @@ function Product({ product, loadCart }) {
       )}
 
       <button
-        className="add-to-cart-button button-primary"
+        className="add-to-cart-button button-accent"
         onClick={handleAddToCart}
       >
         Add to Cart

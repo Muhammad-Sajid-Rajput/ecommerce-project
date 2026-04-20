@@ -1,5 +1,5 @@
 import { NavLink, useNavigate, useSearchParams } from "react-router-dom";
-import "./header.css";
+import "./Header.css";
 import CartIcon from "../assets/images/icons/cart-icon.png";
 import SearchIcon from "../assets/images/icons/search-icon.png";
 import { useState } from "react";
@@ -45,7 +45,7 @@ function Header({ cart }) {
           />
 
           <button className="search-button" onClick={searchProducts}>
-            <img className="search-icon" src={SearchIcon} />
+            <img className="search-icon" src={SearchIcon} alt="Search" />
           </button>
         </div>
 
@@ -55,7 +55,7 @@ function Header({ cart }) {
           </NavLink>
 
           <NavLink className="cart-link header-link" to="/checkout">
-            <img className="cart-icon" src={CartIcon} />
+            <img className="cart-icon" src={CartIcon} alt="Cart" />
             <div className="cart-quantity">{totalQuantity}</div>
             <div className="cart-text">Cart</div>
           </NavLink>

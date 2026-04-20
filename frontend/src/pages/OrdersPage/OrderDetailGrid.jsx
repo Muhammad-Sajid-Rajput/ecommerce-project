@@ -39,11 +39,10 @@ function OrderDetailsGrid({ order, loadCart }) {
                 Quantity: {orderProduct.quantity}
               </div>
               <button
-                className="buy-again-button button-primary"
+                className="buy-again-button button-accent"
                 onClick={handleAddToCart}
               >
                 <img className="buy-again-icon" src={BuyAgainIcon} alt="" />
-
                 <span className="buy-again-message">Add to Cart</span>
               </button>
             </div>

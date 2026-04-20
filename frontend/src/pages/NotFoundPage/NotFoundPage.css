@@ -1,78 +1,120 @@
 /* Styles for 404 Not Found page */
 .notfound-page {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 40px;
-      min-height: calc(100vh - 72px);
-      background: linear-gradient(180deg, #fafafa 0%, #ffffff 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 16px;
+  min-height: calc(100vh - 60px);
+  background: var(--bg-main);
+  margin-top: 60px;
+}
+
+@media (max-width: 480px) {
+  .notfound-page {
+    padding: 24px 12px;
+    margin-top: 56px;
+  }
 }
 
 .notfound-card {
-      text-align: center;
-      background: #ffffff;
-      border-radius: 12px;
-      padding: 40px 32px;
-      box-shadow: 0 8px 30px rgba(16, 24, 40, 0.06);
-      max-width: 720px;
-      width: 100%;
+  text-align: center;
+  background: var(--bg-card);
+  border-radius: 12px;
+  padding: 40px 32px;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-default);
+  max-width: 600px;
+  width: 100%;
 }
 
 .notfound-graphic {
-      font-size: 48px;
-      margin-bottom: 8px;
+  font-size: 64px;
+  margin-bottom: 8px;
+  line-height: 1;
 }
 
 .notfound-code {
-      font-size: 72px;
-      margin: 0;
-      color: #0f172a;
-      font-weight: 700;
+  font-size: 96px;
+  margin: 0;
+  color: var(--green-primary);
+  font-weight: 700;
+  line-height: 1;
+}
+
+@media (max-width: 480px) {
+  .notfound-code {
+    font-size: 72px;
+  }
 }
 
 .notfound-title {
-      font-size: 26px;
-      margin: 8px 0 0;
-      color: #0f172a;
+  font-size: 24px;
+  margin: 16px 0 0;
+  color: var(--text-primary);
+}
+
+@media (max-width: 480px) {
+  .notfound-title {
+    font-size: 20px;
+  }
 }
 
 .notfound-message {
-      margin: 12px 0 20px;
-      color: #6b7280;
+  margin: 12px 0 24px;
+  color: var(--text-secondary);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+@media (max-width: 480px) {
+  .notfound-message {
+    font-size: 14px;
+  }
 }
 
 .notfound-actions {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-      flex-wrap: wrap;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
-.button-primary {
-      background: #084f2d;
-      color: white;
-      padding: 10px 16px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 600;
+@media (max-width: 480px) {
+  .notfound-actions {
+    flex-direction: column;
+  }
+
+  .notfound-page .button-primary,
+  .notfound-page .button-secondary {
+    width: 100%;
+  }
 }
 
-.button-secondary {
-      background: transparent;
-      color: #084f2d;
-      padding: 10px 16px;
-      border-radius: 8px;
-      text-decoration: none;
-      border: 1px solid rgba(14, 165, 233, 0.14);
-      font-weight: 600;
+.notfound-page .button-primary {
+  background: var(--green-primary);
+  color: var(--text-white);
+}
+
+.notfound-page .button-primary:hover {
+  background: var(--green-dark);
+}
+
+.notfound-page .button-secondary {
+  background: transparent;
+  color: var(--green-primary);
+}
+
+.notfound-page .button-secondary:hover {
+  background: var(--bg-hover);
+  border-color: var(--green-primary);
 }
 
 @media (max-width: 520px) {
-      .notfound-card {
-            padding: 28px 20px;
-      }
+  .notfound-card {
+    padding: 28px 20px;
+  }
 
-      .notfound-code {
-            font-size: 56px;
-      }
+  .notfound-code {
+    font-size: 56px;
+  }
 }

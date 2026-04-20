@@ -67,7 +67,6 @@ function CartItemDetails({ cartItem, loadCart }) {
               <input
                 type="number"
                 className="quantity-textbox"
-                defaultValue={cartItem.quantity}
                 value={quantity}
                 onChange={updateQuantityInput}
                 onKeyDown={handleQuantityKeyDown}

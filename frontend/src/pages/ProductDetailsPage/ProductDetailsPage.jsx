@@ -165,14 +165,14 @@ function ProductDetailsPage({ cart, loadCart }) {
             )}
 
             <button
-              className="add-to-cart-button button-primary"
+              className="add-to-cart-button button-accent"
               onClick={handleAddToCart}
             >
               Add to Cart
             </button>
 
             <button
-              className="buy-now-button button-secondary"
+              className="buy-now-button button-accent"
               onClick={async () => {
                 await handleAddToCart();
                 navigate("/checkout");

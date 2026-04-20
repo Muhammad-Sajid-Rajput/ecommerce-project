@@ -1,17 +1,16 @@
 .checkout-header {
   height: 60px;
-  padding-left: 30px;
-  padding-right: 30px;
-  background-color: white;
-
+  padding: 0 16px;
+  background-color: var(--bg-card);
   display: flex;
   justify-content: center;
-
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
+  box-shadow: var(--shadow-sm);
+  border-bottom: 1px solid var(--border-default);
 }
 
 .checkout-header .header-content {
@@ -24,25 +23,28 @@
 
 .checkout-header .checkout-header-left-section {
   width: 200px;
+  display: flex;
+  align-items: center;
 }
 
 .checkout-header .checkout-header-link {
   text-decoration: none;
-  color: rgb(33, 33, 33);
+  color: var(--text-primary);
 }
 
 .checkout-header .logo-text {
   font-size: 20px;
   font-weight: 700;
-  color: rgb(33, 33, 33);
+  color: var(--text-primary);
   white-space: nowrap;
 }
 
-/* @media is used to create responsive design (making the
-   website look good on any screen size). This @media
-   means when the screen width is 575px or less, different
-   styles (inside the {...}) will be applied. */
-@media (max-width: 575px) {
+@media (max-width: 768px) {
+  .checkout-header {
+    padding: 0 12px;
+    height: 56px;
+  }
+
   .checkout-header .checkout-header-left-section {
     width: auto;
   }
@@ -50,58 +52,68 @@
   .checkout-header .logo-text {
     font-size: 16px;
   }
+
+  .checkout-header .checkout-header-middle-section {
+    font-size: 16px;
+  }
+
+  .checkout-header .checkout-header-right-section {
+    width: auto;
+  }
+
+  .checkout-header .checkout-header-right-section img {
+    height: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .checkout-header {
+    height: 52px;
+  }
+
+  .checkout-header .logo-text {
+    font-size: 14px;
+  }
+
+  .checkout-header .checkout-header-middle-section {
+    font-size: 14px;
+  }
 }
 
 .checkout-header .checkout-header-middle-section {
   flex: 1;
   flex-shrink: 0;
   text-align: center;
-
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 500;
-
+  color: var(--text-primary);
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .checkout-header .return-to-home-link {
-  color: rgb(25, 135, 84);
+  color: var(--green-primary);
 
   text-decoration: none;
   cursor: pointer;
+  transition: color 0.2s ease;
 }
 
-@media (max-width: 1000px) {
-  .checkout-header .checkout-header-middle-section {
-    font-size: 20px;
-    margin-right: 60px;
-  }
-
-  .checkout-header .return-to-home-link {
-    font-size: 20px;
-  }
+.checkout-header .return-to-home-link:hover {
+  color: var(--green-dark);
 }
 
-@media (max-width: 575px) {
-  .checkout-header .checkout-header-middle-section {
-    margin-right: 5px;
-  }
-}
 
 .checkout-header .checkout-header-right-section {
   text-align: right;
   width: 200px;
   display: flex;
   align-items: center;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 .checkout-header .checkout-header-right-section img {
-  height: 32px;
-}
-
-@media (max-width: 1000px) {
-  .checkout-header .checkout-header-right-section {
-    width: auto;
-  }
+  height: 28px;
+  width: auto;
 }

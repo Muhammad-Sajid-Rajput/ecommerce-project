@@ -24,7 +24,7 @@ function CheckoutHeader({ cart }) {
         </div>
 
         <div className="checkout-header-right-section">
-          <img src={CheckoutLockIcon} />
+          <img src={CheckoutLockIcon} alt="Secure checkout" />
         </div>
       </div>
     </div>

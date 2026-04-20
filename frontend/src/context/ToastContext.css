@@ -1,11 +1,13 @@
 .toast-container {
   position: fixed;
-  top: 80px;
+  top: 76px;
   right: 20px;
   z-index: 9999;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
+  max-width: calc(100vw - 40px);
+  pointer-events: none;
 }
 
 .toast {
@@ -14,11 +16,13 @@
   gap: 12px;
   padding: 14px 18px;
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--shadow-lg);
   min-width: 300px;
   max-width: 400px;
+  width: 100%;
   animation: slideIn 0.3s ease;
-  background: white;
+  background: var(--bg-card);
+  border: 1px solid var(--border-default);
   pointer-events: auto;
   will-change: transform, opacity;
 }
@@ -51,19 +55,19 @@
 }
 
 .toast-success {
-  border-left: 4px solid rgb(25, 135, 84);
+  border-left: 4px solid var(--success);
 }
 
 .toast-error {
-  border-left: 4px solid rgb(220, 38, 38);
+  border-left: 4px solid var(--error);
 }
 
 .toast-info {
-  border-left: 4px solid rgb(59, 130, 246);
+  border-left: 4px solid var(--info);
 }
 
 .toast-warning {
-  border-left: 4px solid rgb(245, 158, 11);
+  border-left: 4px solid var(--warning);
 }
 
 .toast-icon {
@@ -73,25 +77,25 @@
 }
 
 .toast-success .toast-icon {
-  color: rgb(25, 135, 84);
+  color: var(--success);
 }
 
 .toast-error .toast-icon {
-  color: rgb(220, 38, 38);
+  color: var(--error);
 }
 
 .toast-info .toast-icon {
-  color: rgb(59, 130, 246);
+  color: var(--info);
 }
 
 .toast-warning .toast-icon {
-  color: rgb(245, 158, 11);
+  color: var(--warning);
 }
 
 .toast-message {
   flex: 1;
   font-size: 14px;
-  color: rgb(51, 51, 51);
+  color: var(--text-primary);
 }
 
 .toast-close {
@@ -99,7 +103,7 @@
   border: none;
   font-size: 20px;
   cursor: pointer;
-  color: rgb(150, 150, 150);
+  color: var(--text-muted);
   padding: 0;
   width: 24px;
   height: 24px;
@@ -107,26 +111,34 @@
   align-items: center;
   justify-content: center;
   border-radius: 4px;
-  transition: all 0.2s;
+  transition: all 0.2s ease;
 }
 
 .toast-close:hover {
-  background: rgba(0, 0, 0, 0.05);
-  color: rgb(100, 100, 100);
+  background: var(--bg-hover);
+  color: var(--text-secondary);
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .toast-container {
-    left: 10px;
-    right: 10px;
-    top: auto;
-    bottom: 20px;
-    flex-direction: column-reverse;
+    left: 12px;
+    right: 12px;
+    top: 72px;
+    bottom: auto;
+    max-width: none;
   }
 
   .toast {
     min-width: unset;
     max-width: unset;
     width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .toast-container {
+    left: 12px;
+    right: 12px;
+    top: 68px;
   }
 }
